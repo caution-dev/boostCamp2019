@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Movie: Decodable {
 /*
@@ -25,18 +26,35 @@ class Movie: Decodable {
  */
     let id: String
     let grade: MovieGrade.RawValue
-    let thumb: String?
+    let thumb: String
     let reservationGrade: Int
     let title: String
     let reservationRate: Double
     let userRating: Double
     let date: String
     
+    var fullDescription: String {
+        return "평점 : \(userRating) 예매순위 : \(grade) 예매율 : \(reservationRate)"
+    }
+    
     enum MovieGrade: Int {
         case all = 0
         case child = 12
         case youngth = 15
         case adult = 19
+        
+        var image: UIImage! {
+            switch self {
+            case .all:
+                return UIImage(named: "ic_0")
+            case .child:
+                return UIImage(named: "ic_12")
+            case .youngth:
+                return UIImage(named: "ic_15")
+            case .adult:
+                return UIImage(named: "ic_19")
+            }
+        }
     }
     
     enum MovieKey: String, CodingKey {

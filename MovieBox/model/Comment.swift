@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Comment: Codable {
+struct Comment: Codable {
     /*
      rating    Double    평점
      timestamp    Double    작성일시 UNIX Timestamp 값
@@ -28,7 +28,7 @@ class Comment: Codable {
         case movieId = "movie_id"
     }
     
-    required init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CommentKey.self)
         rating = try container.decode(Double.self, forKey: .rating)
         timestamp = try container.decode(Double.self, forKey: .timestamp)
