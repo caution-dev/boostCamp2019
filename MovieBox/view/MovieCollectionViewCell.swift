@@ -10,4 +10,11 @@ import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var thumb: UIImageView!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var reservationInfo: UILabel!
+    @IBOutlet weak var openDate: UILabel!
+    @IBOutlet weak var grade: UIImageView!
+    var imageUrl: URL?
+    
 }

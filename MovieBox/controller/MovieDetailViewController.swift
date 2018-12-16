@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+class MovieDetailViewController: BaseViewController {
 
     /*
      화면구성
@@ -20,23 +20,94 @@ class MovieDetailViewController: UIViewController {
      영화 포스터를 터치하면 포스터를 전체화면에서 볼 수 있습니다.
      */
     
-    var movieDetail: MovieDetail!
+    //MARK: IBOutlets
+    @IBOutlet weak var movieImage: UIImageView!
+    @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var openDate: UILabel!
+    @IBOutlet weak var reservationInfo: UILabel!
+    @IBOutlet weak var gradeImage: UIImageView!
+    @IBOutlet weak var reservationRate: UILabel!
+    @IBOutlet weak var rating: UILabel!
+    @IBOutlet weak var audience: UILabel!
+    @IBOutlet weak var synopsis: UILabel!
+    @IBOutlet weak var director: UILabel!
+    @IBOutlet weak var actor: UILabel!
+    @IBOutlet weak var starRating: StarRating!
+    @IBOutlet weak var commentsTable: UITableView!
+    
+    private var comments: [Comment] = []
+    private var movieId: String = ""
+    private let reusableIdentifier: String = "comment_cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getMovieDetail()
+        
+        //TODO: HeaderView Binding
+    }
 
-        // Do any additional setup after loading the view.
+    func bindData(movie: Movie) {
+        movieId = movie.id
+        title = movie.title
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func getMovieDetail() {
+        MovieServiceImplement.service.getMovie(movieId: movieId) { [weak self] detail in
+            DispatchQueue.main.async {
+                self?.setHeadderView(data: detail)
+            }
+        }
+        CommentServiceImplement.service.getComments(movieId: movieId, success: { [weak self] comments in
+            DispatchQueue.main.async {
+                self?.comments = comments
+                self?.commentsTable.reloadData()
+            }
+        }, error: { [weak self] in
+                self?.showNetworkErrorAlert()
+        })
     }
-    */
+    
+    private func setHeadderView(data: MovieDetail) {
+        movieTitle.text = data.title
+        openDate.text = data.date + " 개봉"
+        reservationInfo.text = data.genreDescription
+        gradeImage.image = data.gradeImage
+        reservationRate.text = "\(data.reservationRate)"
+        audience.text = data.audience.comaString
+        starRating.rating = data.userRating
+        rating.text = "\(data.userRating)"
+        synopsis.text = """
+                        \(data.synopsis)
+                        """
+        director.text = data.director
+        actor.text = data.actor
+        
+        DispatchQueue.global().async { [weak self] in
+            guard let url = URL(string: data.image) else {return}
+            guard let imageData: Data = try? Data(contentsOf: url) else {return}
+            
+            DispatchQueue.main.async {
+                self?.movieImage.image = UIImage(data: imageData)
+            }
+        }
+    }
+}
 
+extension MovieDetailViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return comments.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reusableIdentifier, for: indexPath) as? CommentTableViewCell else { return UITableViewCell() }
+        let comment = comments[indexPath.row]
+        cell.timestamp.text = comment.getTimestmap()
+        cell.contents.text = comment.contents
+        cell.rating.rating = comment.rating
+        cell.writer.text = comment.writer
+        
+        return cell
+    }
+    
+    
 }

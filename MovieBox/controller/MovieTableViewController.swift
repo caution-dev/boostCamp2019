@@ -21,50 +21,63 @@ class MovieTableViewController: BaseViewController {
     
     @IBOutlet weak var movieTableView: UITableView!
     
-    let cellIdentifier: String = "movieCell"
-    var movies: [Movie] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    private let cellIdentifier: String = "movieTableViewCell"
     
     override func viewDidAppear(_ animated: Bool) {
         toggleIndicator()
-
-        getMovies { [weak self] movies in
-            self?.movies = movies
-            DispatchQueue.main.async {
-                self?.movieTableView.reloadData()
-            }
-        }
+        loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        title = MovieBoxDefaults.sorting.title
     }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let cell =  sender as? UITableViewCell {
+            if let indexPath = movieTableView.indexPath(for: cell) {
+                guard let destination = segue.destination as? MovieDetailViewController else {
+                    return
+                }
+                destination.bindData(movie: Movie.data[indexPath.row])
+            }
+        }
+    }
+    
+    func loadData() {
+        // 데이터가 없을 경우에만 API 호출한다.
+        if Movie.data.isEmpty {
+            MovieServiceImplement.service.getMovies { [weak self] movies in
+                DispatchQueue.main.async {
+                    self?.movieTableView.reloadData()
+                }
+            }
+        } else {
+            movieTableView.reloadData()
+        }
     }
 
 }
 
 extension MovieTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return Movie.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MovieTableViewCell else {
             return UITableViewCell()
         }
-        let movie = movies[indexPath.row]
+        let movie = Movie.data[indexPath.row]
         cell.title.text = movie.title
         cell.fullDescription.text = movie.fullDescription
-        cell.grade.image = Movie.MovieGrade(rawValue: movie.grade)?.image
+        cell.grade.image = movie.gradeImage
         cell.thumb.image = nil
         
+        //TODO: 이미지 처리 별도 함수로 빼기
         DispatchQueue.global().async {
-            guard let imageURL: URL = URL(string: movie.thumb) else  {return}
-            guard let imageData: Data = try? Data(contentsOf: imageURL) else {return}
+            guard let url = movie.thumbUrl else {return}
+            guard let imageData: Data = try? Data(contentsOf: url) else {return}
             
             DispatchQueue.main.async {
                 

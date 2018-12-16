@@ -18,10 +18,19 @@ struct Comment: Codable {
      */
     
     let rating: Double
-    let timestamp: Double
+    private let timestamp: Double
     let writer: String
     let movieId: String
     let contents: String
+    
+    func getTimestmap() -> String {
+        let date = Date(timeIntervalSince1970: timestamp)
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:SS"
+        
+        return formatter.string(from: date)
+    }
     
     enum CommentKey: String, CodingKey {
         case rating, timestamp, writer, contents

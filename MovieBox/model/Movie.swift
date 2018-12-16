@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class Movie: Decodable {
+    
+    static var data: [Movie] = []
 /*
      grade    Int    관람등급
      0: 전체이용가
@@ -25,16 +27,33 @@ class Movie: Decodable {
      id    String    영화 고유 ID
  */
     let id: String
-    let grade: MovieGrade.RawValue
-    let thumb: String
-    let reservationGrade: Int
     let title: String
+    private let thumb: String?
+    private let grade: MovieGrade.RawValue
+    private let reservationGrade: Int
     let reservationRate: Double
-    let userRating: Double
+    private let userRating: Double
     let date: String
     
     var fullDescription: String {
         return "평점 : \(userRating) 예매순위 : \(grade) 예매율 : \(reservationRate)"
+    }
+    
+    var shortDescription: String {
+        return "\(grade)위\(userRating) / \(reservationRate)%"
+    }
+    
+    var gradeImage: UIImage {
+        guard let image = MovieGrade(rawValue: grade)?.image else {
+            return UIImage(named: "ic_0")!
+        }
+        return image
+    }
+    
+    var thumbUrl: URL? {
+        guard let thumbnail = thumb else {return nil}
+        guard let imageURL: URL = URL(string: thumbnail) else  {return nil}
+        return imageURL
     }
     
     enum MovieGrade: Int {

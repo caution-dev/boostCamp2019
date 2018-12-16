@@ -2,12 +2,12 @@
 //  CommentService.swift
 //  MovieBox
 //
-//  Created by juhee on 13/12/2018.
+//  Created by juhee on 15/12/2018.
 //  Copyright © 2018 juhee. All rights reserved.
 //
 
 import Foundation
 
-func getComments(movieId: String) -> [Comment] {
-    return []
+protocol CommentService {
+    func getComments(movieId: String, success: @escaping ([Comment])->Void, error: @escaping ()->Void)
 }

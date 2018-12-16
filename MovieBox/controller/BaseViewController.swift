@@ -23,7 +23,9 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(activityIndicator)
         activityIndicator.hidesWhenStopped = true
+        activityIndicator.stopAnimating()
     }
 
     @IBAction func changeSortValue(_ sender: UIBarButtonItem) {
@@ -31,7 +33,7 @@ class BaseViewController: UIViewController {
         
         MovieBoxDefaults.sortingArray.forEach { sorting in
             alertVC.addAction(UIAlertAction(title: sorting.title, style: .default, handler: { _ in
-                MovieBoxDefaults.sortedValue = sorting.rawValue
+                MovieBoxDefaults.sorting = sorting
             }))
         }
         
