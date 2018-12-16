@@ -16,15 +16,11 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var timestamp: UILabel!
     @IBOutlet weak var contents: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func bindData(comment data: Comment) {
+        timestamp.text = data.getTimestmap()
+        contents.text = data.contents
+        rating.rating = data.rating
+        writer.text = data.writer
     }
 
 }

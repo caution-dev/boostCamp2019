@@ -10,6 +10,26 @@ import Foundation
 
 class MovieBoxDefaults {
     
+    private static let defaults = UserDefaults.standard
+    private static let keySorting = "sortingBy"
+    
+    // UserDefault 에 정렬 기준 저장
+    private static var sortingType: Int = defaults.integer(forKey: keySorting) {
+        willSet(newValue) {
+            defaults.set(newValue, forKey: keySorting)
+        }
+    }
+    
+    static var sorting: Sorting {
+        get {
+            return Sorting(rawValue: sortingType) ?? Sorting.booking
+        }
+        set {
+            sortingType = newValue.rawValue
+        }
+    }
+    
+    // 정렬 기준에 대한 정보 표시
     enum Sorting: Int {
         case booking = 0
         case curation = 1
@@ -26,29 +46,12 @@ class MovieBoxDefaults {
             }
         }
         
+        // rawValue 를 넘겨준다. 좀 더 접근하기 쉽도록 만든 property
         var type: Int {
             return self.rawValue
         }
     }
     
-    private static let defaults = UserDefaults.standard
-    private static let keySorting = "sortingBy"
-    
+    // 모든 정렬기준을 가져오고 싶을 때 사용
     static let sortingArray : [Sorting] = [.booking, .curation, .openDate]
-    
-    //TODO: RECHECK
-    private static var sortingType: Int = Sorting.booking.rawValue {
-        willSet(newValue) {
-            defaults.set(newValue, forKey: keySorting)
-        }
-    }
-    
-    static var sorting: Sorting {
-        get {
-            return Sorting(rawValue: sortingType) ?? Sorting.booking
-        }
-        set {
-            sortingType = newValue.rawValue
-        }
-    }
 }

@@ -15,16 +15,23 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var grade: UIImageView!
     @IBOutlet weak var fullDescription: UILabel!
     @IBOutlet weak var openDate: UILabel!
+    var imageUrl: URL?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func bindData(movie data: Movie) {
+        title.text = data.title
+        fullDescription.text = data.fullDescription
+        grade.image = data.gradeImage
+        openDate.text = data.date
+        thumb.image = nil
+        imageUrl = data.thumbUrl
+        
+        if let thumbUrl = data.thumbUrl {
+            thumbUrl.fetchImage { [weak self] image in
+                if self?.imageUrl == thumbUrl {
+                   self?.thumb.image = image
+                }
+            }
+        }
     }
 
 }

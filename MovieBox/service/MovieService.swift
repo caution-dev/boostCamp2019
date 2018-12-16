@@ -9,6 +9,6 @@
 import Foundation
 
 protocol MovieService {
-    func getMovies(handler: @escaping ([Movie])->Void)
-    func getMovie(movieId: String, handler: @escaping (MovieDetail)->Void)
+    func getMovies(success: @escaping (ResponseMovies)->Void, errorHandler: @escaping ()->Void)
+    func getMovie(movieId: String, success: @escaping (MovieDetail)->Void, errorHandler: @escaping ()->Void)
 }

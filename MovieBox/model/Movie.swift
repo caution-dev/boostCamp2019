@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 
 class Movie: Decodable {
-    
-    static var data: [Movie] = []
 /*
      grade    Int    관람등급
      0: 전체이용가
@@ -36,11 +34,11 @@ class Movie: Decodable {
     let date: String
     
     var fullDescription: String {
-        return "평점 : \(userRating) 예매순위 : \(grade) 예매율 : \(reservationRate)"
+        return "평점 : \(userRating) 예매순위 : \(reservationGrade) 예매율 : \(reservationRate)"
     }
     
     var shortDescription: String {
-        return "\(grade)위\(userRating) / \(reservationRate)%"
+        return "\(reservationGrade)위 \(userRating) / \(reservationRate)%"
     }
     
     var gradeImage: UIImage {

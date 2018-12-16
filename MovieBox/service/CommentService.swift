@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CommentService {
-    func getComments(movieId: String, success: @escaping ([Comment])->Void, error: @escaping ()->Void)
+    func getComments(movieId: String, success: @escaping (ResponseComments)->Void, errorHandler: @escaping ()->Void)
 }

@@ -10,55 +10,20 @@ import Foundation
 
 class MovieServiceImplement : MovieService {
 
+    //MARK: - Properties
     private let baseUrl = "http://connect-boxoffice.run.goorm.io/"
     static let service = MovieServiceImplement()
     
-    func getMovie(movieId: String, handler: @escaping (MovieDetail) -> Void) {
-        guard let url: URL = URL(string: "\(baseUrl)movie?id=\(movieId)") else {return}
-    
-        // TODO: 중복 코드 묶기
-        let session: URLSession = URLSession(configuration: .default)
-        let dataTask: URLSessionDataTask = session.dataTask(with: url) { (data: Data?, resource: URLResponse?, error: Error?) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            guard let data = data else {return}
-            
-            do {
-                let apiResponse: MovieDetail = try JSONDecoder().decode(MovieDetail.self, from: data)
-                handler(apiResponse)
-            } catch(let error) {
-                print(error.localizedDescription)
-            }
-        }
-        dataTask.resume()
+    //MARK: - Methods
+    func getMovie(movieId: String, success: @escaping (MovieDetail) -> Void, errorHandler: @escaping () -> Void) {
+        guard let url: URL = URL(string: "\(baseUrl)movie?id=\(movieId)") else { return }
+        NetworkProvider.request(url: url, model: MovieDetail.self, success: success, errorHandler: errorHandler)
+
     }
     
-    func getMovies(handler: @escaping ([Movie]) -> Void) {
+    func getMovies(success: @escaping (ResponseMovies) -> Void, errorHandler: @escaping () -> Void) {
         let orderType = MovieBoxDefaults.sorting.type
-        
-        guard let url: URL = URL(string: "\(baseUrl)movies?order_type=\(orderType)") else {return}
-        
-        let session: URLSession = URLSession(configuration: .default)
-        let dataTask: URLSessionDataTask = session.dataTask(with: url) { (data: Data?, resource: URLResponse?, error: Error?) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            guard let data = data else {return}
-            
-            do {
-                let apiResponse: ResponseMovies = try JSONDecoder().decode(ResponseMovies.self, from: data)
-                Movie.data = apiResponse.movies
-                handler(apiResponse.movies)
-                
-            } catch(let error) {
-                print(error.localizedDescription)
-            }
-        }
-        dataTask.resume()
+        guard let url: URL = URL(string: "\(baseUrl)movies?order_type=\(orderType)") else { return }
+        NetworkProvider.request(url: url, model: ResponseMovies.self, success: success, errorHandler: errorHandler)
     }
 }
