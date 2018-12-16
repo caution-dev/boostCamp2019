@@ -45,7 +45,7 @@
                                                                 <constraint firstAttribute="width" secondItem="ib8-Wi-Ihk" secondAttribute="height" multiplier="99:141" id="9Eo-c7-y4D"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="v2R-K1-FND">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="v2R-K1-FND">
                                                             <rect key="frame" x="83.5" y="249" width="4.5" height="24"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                             <nil key="textColor"/>
@@ -149,19 +149,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="KP5-ZZ-YDk">
-                                                    <rect key="frame" x="108" y="23" width="162.5" height="82"/>
+                                                    <rect key="frame" x="108" y="23" width="52" height="82"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TlX-BG-MYT">
-                                                            <rect key="frame" x="0.0" y="0.0" width="162.5" height="24"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="36.5" height="24"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신과함께-죄와벌" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZpM-D2-Vq1">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="130.5" height="24"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZpM-D2-Vq1">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="4.5" height="24"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_0" translatesAutoresizingMaskIntoConstraints="NO" id="VDn-Lq-K9l">
-                                                                    <rect key="frame" x="138.5" y="2" width="24" height="20"/>
+                                                                    <rect key="frame" x="12.5" y="2" width="24" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="24" id="rR4-O0-lcY"/>
                                                                     </constraints>
@@ -175,7 +175,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ntu-IJ-Onu">
-                                                            <rect key="frame" x="0.0" y="65" width="123" height="17"/>
+                                                            <rect key="frame" x="0.0" y="65" width="52" height="17"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개봉일 : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="aRA-JO-kv9">
                                                                     <rect key="frame" x="0.0" y="0.0" width="48" height="17"/>
@@ -183,8 +183,8 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-12-31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="U1a-sV-oHg">
-                                                                    <rect key="frame" x="48" y="0.0" width="75" height="17"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="U1a-sV-oHg">
+                                                                    <rect key="frame" x="48" y="0.0" width="4" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -293,7 +293,7 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CD5-hx-Xui">
                                                                             <rect key="frame" x="0.0" y="0.0" width="36.5" height="24"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="RxD-gt-cl5">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="RxD-gt-cl5">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="4.5" height="24"/>
                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                                     <nil key="textColor"/>
@@ -795,7 +795,6 @@
         <!--Navigation Controller-->
         <scene sceneID="hul-gP-sN6">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QpV-W2-JHo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" hidesBarsOnTap="YES" id="XOT-vH-Fwn" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
@@ -815,6 +814,7 @@
                         <segue destination="cF1-SJ-qTd" kind="relationship" relationship="rootViewController" id="siZ-8i-wTc"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QpV-W2-JHo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4940" y="80.50974512743629"/>
         </scene>
