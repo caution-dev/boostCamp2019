@@ -17,6 +17,7 @@ class MovieCollectionViewController: BaseViewController {
     private let itemsPerRow: CGFloat = 2
     private let cellAspectRatio: CGFloat = 1.8
     private let cellIdentifier: String = "movieCollectionViewCell"
+    private let noDataCellIdentifier: String = "no_data_cell"
     
     //MARK: - Methods
     //MARK: - Override Methods
@@ -45,7 +46,7 @@ class MovieCollectionViewController: BaseViewController {
     }
     
     //MARK: - Request Data
-    func loadData(force: Bool = false) {
+    private func loadData(force: Bool = false) {
         // 데이터가 없을 경우에만 API 호출한다.
         toggleIndicator()
         MovieInfoHolder.shared.getMovies(success: { [weak self] movies in
@@ -75,10 +76,14 @@ class MovieCollectionViewController: BaseViewController {
 //MARK: CollectionView Delegate , DataSource
 extension MovieCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MovieInfoHolder.shared.count
+        return MovieInfoHolder.shared.noData ? 1 : MovieInfoHolder.shared.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard !MovieInfoHolder.shared.noData else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: noDataCellIdentifier, for: indexPath)
+            return cell
+        }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? MovieCollectionViewCell else {
             return UICollectionViewCell()
         }

@@ -9,9 +9,9 @@
 import Foundation
 
 class NetworkProvider {
+    static let baseURL = "https://connect-boxoffice.run.goorm.io/"
     static func request<DecodeType: Decodable>(url: URL, model: DecodeType.Type, success: @escaping (DecodeType) -> Void, errorHandler: @escaping ()->Void) {
         
-        // TODO: 중복 코드 묶기
         let session: URLSession = URLSession(configuration: .default)
         let dataTask: URLSessionDataTask = session.dataTask(with: url) { (data: Data?, resource: URLResponse?, error: Error?) in
             if let error = error {
@@ -20,7 +20,7 @@ class NetworkProvider {
                 return
             }
             
-            guard let data = data else {return}
+            guard let data = data else { return }
             
             do {
                 let apiResponse: DecodeType = try JSONDecoder().decode(DecodeType.self, from: data)

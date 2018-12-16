@@ -9,17 +9,22 @@
 import Foundation
 
 final class MovieInfoHolder {
+    //MARK:- Properties
     static let shared = MovieInfoHolder()
-    
     private var movies: [Movie] = []
     
     var count: Int {
         return movies.count
     }
     
+    var noData: Bool {
+        return movies.isEmpty
+    }
+    
+    //MARK:- Methods
     func getMovies(success: @escaping ([Movie]) -> Void, errorHandler: @escaping ()->Void, force: Bool) {
         if force || movies.isEmpty {
-            MovieServiceImplement.service.getMovies(success: { [weak self] data in
+            MovieService.service.getMovies(success: { [weak self] data in
                 success(data.movies)
                 self?.movies = data.movies
             }, errorHandler: errorHandler)
@@ -31,5 +36,4 @@ final class MovieInfoHolder {
     func item(at index: Int) -> Movie {
         return movies[index]
     }
-    
 }

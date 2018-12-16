@@ -54,14 +54,14 @@ class MovieTableViewController: BaseViewController {
     }
     
     //MARK: - Request Data
-    func loadData(force: Bool = false) {
+    private func loadData(force: Bool = false) {
         toggleIndicator()
         MovieInfoHolder.shared.getMovies(success: { [weak self] movies in
             DispatchQueue.main.async {
+                self?.toggleIndicator(force: true)
+                self?.refreshControl.endRefreshing()
                 self?.movieTableView.reloadData()
                 self?.title = MovieBoxDefaults.sorting.title
-                self?.toggleIndicator()
-                self?.refreshControl.endRefreshing()
             }
         }, errorHandler: self.errorHandler, force: force)
     }
@@ -83,10 +83,15 @@ class MovieTableViewController: BaseViewController {
 //MARK: TableView Delegate , DataSource
 extension MovieTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MovieInfoHolder.shared.count
+        return MovieInfoHolder.shared.noData ? 1 : MovieInfoHolder.shared.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard !MovieInfoHolder.shared.noData else {
+            let cell = UITableViewCell()
+            cell.textLabel?.text = "데이터가 없습니다."
+            return cell
+        }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MovieTableViewCell else {
             return UITableViewCell()
         }

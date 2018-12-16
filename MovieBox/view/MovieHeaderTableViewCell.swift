@@ -29,7 +29,7 @@ class MovieHeaderTableViewCell: UITableViewCell {
         openDate.text = data.date + " 개봉"
         reservationInfo.text = data.genreDescription
         gradeImage.image = data.gradeImage
-        reservationRate.text = "\(data.reservationRate)"
+        reservationRate.text = data.shortDescription
         audience.text = data.audience.comaString
         starRating.rating = data.userRating
         rating.text = "\(data.userRating)"

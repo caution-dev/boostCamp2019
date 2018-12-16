@@ -22,5 +22,4 @@ class CommentTableViewCell: UITableViewCell {
         rating.rating = data.rating
         writer.text = data.writer
     }
-
 }

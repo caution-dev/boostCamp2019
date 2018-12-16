@@ -19,8 +19,6 @@
 		D5273CC521C2A55B0029C4E6 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5273CC421C2A55B0029C4E6 /* MovieCollectionViewCell.swift */; };
 		D5273CC721C2A5640029C4E6 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5273CC621C2A5640029C4E6 /* MovieTableViewCell.swift */; };
 		D5273CC921C2B77F0029C4E6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5273CC821C2B77F0029C4E6 /* Response.swift */; };
-		D535EB0621C49D48001F46BC /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB0521C49D48001F46BC /* MovieService.swift */; };
-		D535EB0821C49D83001F46BC /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB0721C49D83001F46BC /* CommentService.swift */; };
 		D535EB0C21C54E71001F46BC /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB0B21C54E71001F46BC /* StarRating.swift */; };
 		D535EB0E21C560D9001F46BC /* BinaryInteger+NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB0D21C560D9001F46BC /* BinaryInteger+NumberFormatter.swift */; };
 		D535EB1021C5F4B3001F46BC /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB0F21C5F4B3001F46BC /* CommentTableViewCell.swift */; };
@@ -50,8 +48,6 @@
 		D5273CC421C2A55B0029C4E6 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5273CC621C2A5640029C4E6 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		D5273CC821C2B77F0029C4E6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		D535EB0521C49D48001F46BC /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
-		D535EB0721C49D83001F46BC /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		D535EB0B21C54E71001F46BC /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
 		D535EB0D21C560D9001F46BC /* BinaryInteger+NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+NumberFormatter.swift"; sourceTree = "<group>"; };
 		D535EB0F21C5F4B3001F46BC /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -96,7 +92,6 @@
 		D5273CB521C294C50029C4E6 /* service */ = {
 			isa = PBXGroup;
 			children = (
-				D535EB0221C49CA3001F46BC /* protocol */,
 				D5273CB921C297260029C4E6 /* MovieServiceImplement.swift */,
 				D5273CBB21C2973B0029C4E6 /* CommentServiceImplement.swift */,
 			);
@@ -124,15 +119,6 @@
 				D535EB0F21C5F4B3001F46BC /* CommentTableViewCell.swift */,
 			);
 			path = view;
-			sourceTree = "<group>";
-		};
-		D535EB0221C49CA3001F46BC /* protocol */ = {
-			isa = PBXGroup;
-			children = (
-				D535EB0521C49D48001F46BC /* MovieService.swift */,
-				D535EB0721C49D83001F46BC /* CommentService.swift */,
-			);
-			name = protocol;
 			sourceTree = "<group>";
 		};
 		D535EB1B21C636F3001F46BC /* holder */ = {
@@ -271,12 +257,10 @@
 				D5273CB021C293180029C4E6 /* BaseViewController.swift in Sources */,
 				D5273CB221C294A80029C4E6 /* MovieTableViewController.swift in Sources */,
 				D5273CC021C2978D0029C4E6 /* MovieDetail.swift in Sources */,
-				D535EB0821C49D83001F46BC /* CommentService.swift in Sources */,
 				D535EB0E21C560D9001F46BC /* BinaryInteger+NumberFormatter.swift in Sources */,
 				D535EB1F21C65584001F46BC /* FullImageViewController.swift in Sources */,
 				D5273CC221C29FA80029C4E6 /* MovieDetailViewController.swift in Sources */,
 				D5273CC721C2A5640029C4E6 /* MovieTableViewCell.swift in Sources */,
-				D535EB0621C49D48001F46BC /* MovieService.swift in Sources */,
 				D535EB1821C630E6001F46BC /* URL+Cache.swift in Sources */,
 				D5273CBC21C2973B0029C4E6 /* CommentServiceImplement.swift in Sources */,
 				D5273CB421C294B10029C4E6 /* MovieCollectionViewController.swift in Sources */,
@@ -438,8 +422,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5BKN5926VM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MovieBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,6 +432,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sample.MovieBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -456,8 +442,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5BKN5926VM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MovieBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -465,6 +452,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sample.MovieBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

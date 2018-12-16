@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Movie: Decodable {
+struct Movie: Codable {
 /*
      grade    Int    관람등급
      0: 전체이용가
@@ -27,7 +27,7 @@ class Movie: Decodable {
     let id: String
     let title: String
     private let thumb: String?
-    private let grade: MovieGrade.RawValue
+    private let grade: Int
     private let reservationGrade: Int
     let reservationRate: Double
     private let userRating: Double
@@ -38,7 +38,7 @@ class Movie: Decodable {
     }
     
     var shortDescription: String {
-        return "\(reservationGrade)위 \(userRating) / \(reservationRate)%"
+        return "\(reservationGrade)위 (\(userRating)) / \(reservationRate)%"
     }
     
     var gradeImage: UIImage {
@@ -74,23 +74,10 @@ class Movie: Decodable {
         }
     }
     
-    enum MovieKey: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id, grade, title, date, thumb
         case reservationGrade = "reservation_grade"
         case reservationRate = "reservation_rate"
         case userRating = "user_rating"
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: MovieKey.self)
-        
-        id = try container.decode(String.self, forKey: .id)
-        grade = try container.decode(Int.self, forKey: .grade)
-        thumb = try container.decode(String.self, forKey: .thumb)
-        reservationGrade = try container.decode(Int.self, forKey: .reservationGrade)
-        title = try container.decode(String.self, forKey: .title)
-        reservationRate = try container.decode(Double.self, forKey: .reservationRate)
-        userRating = try container.decode(Double.self, forKey: .userRating)
-        date = try container.decode(String.self, forKey: .date)
     }
 }

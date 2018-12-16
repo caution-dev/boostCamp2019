@@ -8,15 +8,14 @@
 
 import Foundation
 
-class CommentServiceImplement : CommentService {
+class CommentServiceImplement {
     
     //MARK: - Properties
-    private let baseUrl = "http://connect-boxoffice.run.goorm.io/comments"
     static let service = CommentServiceImplement()
     
     //MARK: - Methods
     func getComments(movieId: String, success: @escaping (ResponseComments) -> Void, errorHandler: @escaping () -> Void) {
-        guard let url: URL = URL(string: "\(baseUrl)?movie_id=\(movieId)") else { return }
+        guard let url: URL = URL(string: "\(NetworkProvider.baseURL)comments?movie_id=\(movieId)") else { return }
         NetworkProvider.request(url: url, model: ResponseComments.self, success: success, errorHandler: errorHandler)
     }
 }
