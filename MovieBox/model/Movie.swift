@@ -32,8 +32,10 @@ struct Movie: Codable {
     let reservationRate: Double
     private let userRating: Double
     let date: String
+    fileprivate let hello = "helllllo"
     
     var fullDescription: String {
+
         return "평점 : \(userRating) 예매순위 : \(reservationGrade) 예매율 : \(reservationRate)"
     }
     

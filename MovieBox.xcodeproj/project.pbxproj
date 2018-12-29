@@ -26,7 +26,7 @@
 		D535EB1A21C63132001F46BC /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB1921C63132001F46BC /* ImageCache.swift */; };
 		D535EB1F21C65584001F46BC /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB1E21C65584001F46BC /* FullImageViewController.swift */; };
 		D535EB2121C68485001F46BC /* MovieHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB2021C68485001F46BC /* MovieHeaderTableViewCell.swift */; };
-		D535EB2321C688D4001F46BC /* MainInfoHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB2221C688D4001F46BC /* MainInfoHolder.swift */; };
+		D535EB2321C688D4001F46BC /* MovieInfoHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB2221C688D4001F46BC /* MovieInfoHolder.swift */; };
 		D535EB2521C68A8B001F46BC /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535EB2421C68A8B001F46BC /* NetworkProvider.swift */; };
 		D5BA355D21BEC3EA009E03B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BA355C21BEC3EA009E03B1 /* AppDelegate.swift */; };
 		D5BA356221BEC3EB009E03B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5BA356021BEC3EB009E03B1 /* Main.storyboard */; };
@@ -55,7 +55,7 @@
 		D535EB1921C63132001F46BC /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		D535EB1E21C65584001F46BC /* FullImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		D535EB2021C68485001F46BC /* MovieHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		D535EB2221C688D4001F46BC /* MainInfoHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainInfoHolder.swift; sourceTree = "<group>"; };
+		D535EB2221C688D4001F46BC /* MovieInfoHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieInfoHolder.swift; sourceTree = "<group>"; };
 		D535EB2421C68A8B001F46BC /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		D5BA355921BEC3EA009E03B1 /* MovieBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5BA355C21BEC3EA009E03B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		D535EB1B21C636F3001F46BC /* holder */ = {
 			isa = PBXGroup;
 			children = (
-				D535EB2221C688D4001F46BC /* MainInfoHolder.swift */,
+				D535EB2221C688D4001F46BC /* MovieInfoHolder.swift */,
 			);
 			path = holder;
 			sourceTree = "<group>";
@@ -275,7 +275,7 @@
 				D5273CBA21C297260029C4E6 /* MovieServiceImplement.swift in Sources */,
 				D5273CB821C294DC0029C4E6 /* Movie.swift in Sources */,
 				D5273CC521C2A55B0029C4E6 /* MovieCollectionViewCell.swift in Sources */,
-				D535EB2321C688D4001F46BC /* MainInfoHolder.swift in Sources */,
+				D535EB2321C688D4001F46BC /* MovieInfoHolder.swift in Sources */,
 				D5273CBE21C2974B0029C4E6 /* Comment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,9 +8,9 @@
 
 import Foundation
 
-class NetworkProvider {
+final class NetworkProvider {
     static let baseURL = "https://connect-boxoffice.run.goorm.io/"
-    static func request<DecodeType: Decodable>(url: URL, model: DecodeType.Type, success: @escaping (DecodeType) -> Void, errorHandler: @escaping ()->Void) {
+    static func request<DecodeType: Decodable>(url: URL, success: @escaping (DecodeType) -> Void, errorHandler: @escaping ()->Void) {
         
         let session: URLSession = URLSession(configuration: .default)
         let dataTask: URLSessionDataTask = session.dataTask(with: url) { (data: Data?, resource: URLResponse?, error: Error?) in

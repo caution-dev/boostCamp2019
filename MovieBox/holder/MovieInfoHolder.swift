@@ -1,5 +1,5 @@
 //
-//  MainMovieInfoHolder.swift
+//  MovieInfoHolder.swift
 //  MovieBox
 //
 //  Created by juhee on 16/12/2018.

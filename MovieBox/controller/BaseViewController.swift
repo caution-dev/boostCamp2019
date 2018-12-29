@@ -58,7 +58,7 @@ class BaseViewController: UIViewController {
     func showChangeSortValue(completion: @escaping () -> Void) {
         let alertVC = UIAlertController(title: "정렬 방식 선택", message: "영화를 어떤 방식으로 정렬할까요?", preferredStyle: .actionSheet)
         
-        MovieBoxDefaults.sortingArray.forEach { sorting in
+        MovieBoxDefaults.Sorting.allCases.forEach { sorting in
             alertVC.addAction(UIAlertAction(title: sorting.title, style: .default, handler: { _ in
                 MovieBoxDefaults.sorting = sorting
                 completion()

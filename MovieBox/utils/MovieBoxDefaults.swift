@@ -30,7 +30,7 @@ class MovieBoxDefaults {
     }
     
     // 정렬 기준에 대한 정보 표시
-    enum Sorting: Int {
+    enum Sorting: Int, CaseIterable {
         case booking = 0
         case curation = 1
         case openDate = 2
@@ -51,7 +51,4 @@ class MovieBoxDefaults {
             return self.rawValue
         }
     }
-    
-    // 모든 정렬기준을 가져오고 싶을 때 사용
-    static let sortingArray : [Sorting] = [.booking, .curation, .openDate]
 }

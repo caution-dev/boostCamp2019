@@ -16,6 +16,6 @@ class CommentServiceImplement {
     //MARK: - Methods
     func getComments(movieId: String, success: @escaping (ResponseComments) -> Void, errorHandler: @escaping () -> Void) {
         guard let url: URL = URL(string: "\(NetworkProvider.baseURL)comments?movie_id=\(movieId)") else { return }
-        NetworkProvider.request(url: url, model: ResponseComments.self, success: success, errorHandler: errorHandler)
+        NetworkProvider.request(url: url, success: success, errorHandler: errorHandler)
     }
 }

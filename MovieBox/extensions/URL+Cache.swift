@@ -12,6 +12,7 @@ extension URL {
     
     typealias ImageCacheCompletion = (UIImage) -> Void
     
+    // 디스크 캐싱 경로 설정
     var diskPath: String {
         let diskPaths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let cacheDirectory = diskPaths[0] as NSString
@@ -19,6 +20,7 @@ extension URL {
         return rtnPath
     }
     
+    // 캐싱된 이미지가 있는지 체크
     private var cachedImage: UIImage? {
         if let image = ImageCache.shared.object(forKey: absoluteString as AnyObject) {
             return image as? UIImage
@@ -34,7 +36,6 @@ extension URL {
     //MARK: - Methods
     // 캐시 이미지 여부를 확인합니다.
     func fetchImage(completion: @escaping ImageCacheCompletion) {
-        
         if let image = cachedImage {
             completion(image)
             return

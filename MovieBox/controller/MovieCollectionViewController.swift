@@ -47,7 +47,6 @@ class MovieCollectionViewController: BaseViewController {
     
     //MARK: - Request Data
     private func loadData(force: Bool = false) {
-        // 데이터가 없을 경우에만 API 호출한다.
         toggleIndicator()
         MovieInfoHolder.shared.getMovies(success: { [weak self] movies in
             DispatchQueue.main.async {
