@@ -46,9 +46,16 @@
 
 스크린샷
 -----
-![화면1](/images/ScreenShot1.png){:width="40px"}
-![화면2](/images/ScreenShot2.png){:width="40px"}
-![화면3](/images/ScreenShot3.png){:width="40px"}
-![화면4](/images/ScreenShot4.png){:width="40px"}
-![화면5](/images/ScreenShot5.png){:width="40px"}
-![화면6](/images/ScreenShot6.png){:width="40px"}
+#### 화면1
+<p>
+<img src="/images/ScreenShot1.png" width="30%" height="30%">
+<img src="/images/ScreenShot2.png" width="30%" height="30%">
+<img src="/images/ScreenShot3.png" width="30%" height="30%">
+</p>
+
+#### 화면2
+<p>
+<img src="/images/ScreenShot4.png" width="30%" height="30%">
+<img src="/images/ScreenShot5.png" width="30%" height="30%">
+<img src="/images/ScreenShot6.png" width="30%" height="30%">
+</p>
