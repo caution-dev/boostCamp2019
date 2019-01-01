@@ -1,5 +1,5 @@
 //
-//  CommentServiceImplement.swift
+//  CommentService.swift
 //  MovieBox
 //
 //  Created by juhee on 13/12/2018.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-class CommentServiceImplement {
+class CommentService {
     
     //MARK: - Properties
-    static let service = CommentServiceImplement()
+    static let service = CommentService()
     
     //MARK: - Methods
     func getComments(movieId: String, success: @escaping (ResponseComments) -> Void, errorHandler: @escaping () -> Void) {
-        guard let url: URL = URL(string: "\(NetworkProvider.baseURL)comments?movie_id=\(movieId)") else { return }
+        guard let url: URL = NetworkProvider.createURL(tailURL: "comments?movie_id=\(movieId)") else { return }
         NetworkProvider.request(url: url, success: success, errorHandler: errorHandler)
     }
 }

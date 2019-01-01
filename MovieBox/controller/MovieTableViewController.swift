@@ -18,21 +18,47 @@
 
 import UIKit
 
-class MovieTableViewController: BaseViewController {
-    
-    //MARK: - Properties
+class MovieTableViewController: UIViewController {
+    //MARK :- Properties
     //MARK: IBOutlets
     @IBOutlet weak var movieTableView: UITableView!
     
     //MARK: Private Properties
     private let cellIdentifier: String = "movieTableViewCell"
     
+    //MARK: Protocol Properties
+    var refreshControl: UIRefreshControl? = {
+        let refresh = UIRefreshControl()
+        refresh.tintColor = UIColor.init(named: "Primary")
+        return refresh
+    }()
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        indicator.hidesWhenStopped = true
+        indicator.tintColor = UIColor.init(named: "Primary")
+        view.addSubview(indicator)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        return indicator
+    }()
+    
+    lazy var netWorkErrorHandler: () -> Void = { [weak self] in
+        DispatchQueue.main.async {
+            self?.showNetworkErrorAlert(completion: { [weak self] in
+                self?.refreshControl?.endRefreshing()
+                self?.toggleIndicator(force: true)
+            })
+        }
+    }
+    
     //MARK: - Methods
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         movieTableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,11 +85,11 @@ class MovieTableViewController: BaseViewController {
         MovieInfoHolder.shared.getMovies(success: { [weak self] movies in
             DispatchQueue.main.async {
                 self?.toggleIndicator(force: true)
-                self?.refreshControl.endRefreshing()
+                self?.refreshControl?.endRefreshing()
                 self?.movieTableView.reloadData()
                 self?.title = MovieBoxDefaults.sorting.title
             }
-        }, errorHandler: self.errorHandler, force: force)
+        }, errorHandler: self.netWorkErrorHandler, force: force)
     }
     
     @objc private func refreshData(_ sender: Any) {
@@ -72,7 +98,7 @@ class MovieTableViewController: BaseViewController {
     
     //MARK: IBActions
     @IBAction func changeSortValue(_ sender: UIBarButtonItem) {
-        showChangeSortValue { [weak self] in
+        sortChange { [weak self] in
             self?.loadData(force: true)
         }
     }
@@ -100,3 +126,5 @@ extension MovieTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
 }
+
+extension MovieTableViewController: SortChange, NetworkingIndicate {}

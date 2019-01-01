@@ -18,11 +18,32 @@
 import UIKit
 import Photos
 
-class MovieDetailViewController: BaseViewController {
-
+class MovieDetailViewController: UIViewController, NetworkingIndicate {
     //MARK: - Properties
     //MARK: IBOutlets
     @IBOutlet weak var detailTable: UITableView!
+    
+    //MARK :- Properties
+    var refreshControl: UIRefreshControl?
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        indicator.hidesWhenStopped = true
+        indicator.tintColor = UIColor.init(named: "Primary")
+        view.addSubview(indicator)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        return indicator
+    }()
+    lazy var netWorkErrorHandler: () -> Void = { [weak self] in
+        DispatchQueue.main.async {
+            self?.showNetworkErrorAlert(completion: { [weak self] in
+                self?.refreshControl?.endRefreshing()
+                self?.toggleIndicator(force: true)
+            })
+        }
+    }
+
     
     //MARK: Private Properties
     private var detail: MovieDetail? = nil
@@ -78,7 +99,7 @@ class MovieDetailViewController: BaseViewController {
         group.enter()
         queue.async(group: group) { [weak self] in
             guard let self = self else { return }
-            CommentServiceImplement.service.getComments(movieId: self.movieId, success: { [weak self] data in
+            CommentService.service.getComments(movieId: self.movieId, success: { [weak self] data in
                 DispatchQueue.main.async {
                     self?.comments = data.comments
                     group.leave()

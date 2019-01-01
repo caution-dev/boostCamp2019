@@ -10,7 +10,6 @@ import UIKit
 import Photos
 
 class FullImageViewController: UIViewController {
-    
     //MARK: - Properties
     //MARK: IBOutlets
     @IBOutlet weak var fullImage: UIImageView!

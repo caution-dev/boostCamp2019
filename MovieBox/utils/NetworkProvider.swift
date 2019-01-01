@@ -32,4 +32,8 @@ final class NetworkProvider {
         }
         dataTask.resume()
     }
+    
+    static func createURL(tailURL tail: String) -> URL? {
+        return URL(string: baseURL + tail)
+    }
 }

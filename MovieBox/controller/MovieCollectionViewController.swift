@@ -8,9 +8,9 @@
 
 import UIKit
 
-class MovieCollectionViewController: BaseViewController {
-    
-    //MARK: - Properties
+class MovieCollectionViewController: UIViewController {
+    //MARK :- Properties
+    //MARK: IBOutlet
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     //MARK: Private Properties
@@ -19,12 +19,39 @@ class MovieCollectionViewController: BaseViewController {
     private let cellIdentifier: String = "movieCollectionViewCell"
     private let noDataCellIdentifier: String = "no_data_cell"
     
+    //MARK: Protocol Properties
+    var refreshControl: UIRefreshControl? = {
+        let refresh = UIRefreshControl()
+        refresh.tintColor = UIColor.init(named: "Primary")
+        return refresh
+    }()
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        indicator.hidesWhenStopped = true
+        indicator.tintColor = UIColor.init(named: "Primary")
+        view.addSubview(indicator)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        return indicator
+    }()
+    
+    lazy var netWorkErrorHandler: () -> Void = { [weak self] in
+        DispatchQueue.main.async {
+            self?.showNetworkErrorAlert(completion: { [weak self] in
+                self?.refreshControl?.endRefreshing()
+                self?.toggleIndicator(force: true)
+            })
+        }
+    }
+    
     //MARK: - Methods
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         movieCollectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,9 +80,9 @@ class MovieCollectionViewController: BaseViewController {
                 self?.toggleIndicator()
                 self?.movieCollectionView.reloadData()
                 self?.title = MovieBoxDefaults.sorting.title
-                self?.refreshControl.endRefreshing()
+                self?.refreshControl?.endRefreshing()
             }
-        }, errorHandler: self.errorHandler, force: force)
+        }, errorHandler: self.netWorkErrorHandler, force: force)
     }
     
     @objc func refreshData(_ sender: Any) {
@@ -64,7 +91,7 @@ class MovieCollectionViewController: BaseViewController {
     
     //MARK: IBActions
     @IBAction func changeSortValue(_ sender: UIBarButtonItem) {
-        showChangeSortValue { [weak self] in
+        sortChange { [weak self] in
             self?.loadData(force: true)
         }
     }
@@ -100,3 +127,5 @@ extension MovieCollectionViewController: UICollectionViewDelegate, UICollectionV
         return CGSize(width: widthPerItem, height: height)
     }
 }
+
+extension MovieCollectionViewController: SortChange, NetworkingIndicate {}
