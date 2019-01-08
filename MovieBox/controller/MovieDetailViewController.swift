@@ -24,25 +24,10 @@ class MovieDetailViewController: UIViewController, NetworkingIndicate {
     @IBOutlet weak var detailTable: UITableView!
     
     //MARK :- Properties
-    var refreshControl: UIRefreshControl?
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        indicator.hidesWhenStopped = true
-        indicator.tintColor = UIColor.init(named: "Primary")
-        view.addSubview(indicator)
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        return indicator
-    }()
-    lazy var netWorkErrorHandler: () -> Void = { [weak self] in
-        DispatchQueue.main.async {
-            self?.showNetworkErrorAlert(completion: { [weak self] in
-                self?.refreshControl?.endRefreshing()
-                self?.toggleIndicator(force: true)
-            })
-        }
-    }
+    //MARK: Protocol Properties
+    let refreshControl: UIRefreshControl? = nil
+    let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+    var netWorkErrorHandler: () -> Void = {}
     
     //MARK: Private Properties
     private var detail: MovieDetail? = nil
@@ -54,6 +39,11 @@ class MovieDetailViewController: UIViewController, NetworkingIndicate {
     
     //MARK: - Methods
     //MARK: - Override Methods
+    override func viewDidLoad() {
+        let tintColor = UIColor.init(named: "Primary") ?? .blue
+        initNetworkingIndicators(refreshTintColor: tintColor, activityTintColor: tintColor)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
@@ -62,8 +52,7 @@ class MovieDetailViewController: UIViewController, NetworkingIndicate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fullImage" {
             // 케이스 별로 에러 처리를 하기 위해서 guard let 구문으로 했다.
-            guard let navi = segue.destination as? UINavigationController else { return }
-            guard let destination = navi.topViewController as? FullImageViewController else { return }
+            guard let destination = (segue.destination as? UINavigationController)?.topViewController as? FullImageViewController else { return }
             guard let detail = detail else { return }
             guard let imageUrl = URL(string: detail.image) else { return }
             destination.bind(movieName: detail.title, url: imageUrl)

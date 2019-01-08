@@ -12,5 +12,5 @@ import UIKit
 protocol NetworkingIndicate: class {
     var refreshControl: UIRefreshControl? { get }
     var activityIndicator: UIActivityIndicatorView { get }
-    var netWorkErrorHandler: () -> Void { get }
+    var netWorkErrorHandler: () -> Void { get set }
 }

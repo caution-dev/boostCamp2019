@@ -11,8 +11,28 @@ import UIKit
 
 extension NetworkingIndicate where Self: UIViewController {
     
-    func toggleIndicator(force: Bool = false) {
-        if force || activityIndicator.isAnimating {
+    func initNetworkingIndicators(refreshTintColor: UIColor, activityTintColor: UIColor) {
+        refreshControl?.tintColor = refreshTintColor
+        
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.tintColor = refreshTintColor
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        netWorkErrorHandler = { [weak self] in
+            DispatchQueue.main.async {
+                self?.showNetworkErrorAlert(completion: { [weak self] in
+                    self?.refreshControl?.endRefreshing()
+                    self?.toggleIndicator(force: true)
+                })
+            }
+        }
+    }
+    
+    func toggleIndicator(force turnOffActivityIndicatorForce: Bool = false) {
+        if turnOffActivityIndicatorForce || activityIndicator.isAnimating {
             activityIndicator.stopAnimating()
         } else {
             activityIndicator.startAnimating()

@@ -27,36 +27,16 @@ class MovieTableViewController: UIViewController {
     private let cellIdentifier: String = "movieTableViewCell"
     
     //MARK: Protocol Properties
-    var refreshControl: UIRefreshControl? = {
-        let refresh = UIRefreshControl()
-        refresh.tintColor = UIColor.init(named: "Primary")
-        return refresh
-    }()
-    
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        indicator.hidesWhenStopped = true
-        indicator.tintColor = UIColor.init(named: "Primary")
-        view.addSubview(indicator)
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        return indicator
-    }()
-    
-    lazy var netWorkErrorHandler: () -> Void = { [weak self] in
-        DispatchQueue.main.async {
-            self?.showNetworkErrorAlert(completion: { [weak self] in
-                self?.refreshControl?.endRefreshing()
-                self?.toggleIndicator(force: true)
-            })
-        }
-    }
+    let refreshControl: UIRefreshControl? = UIRefreshControl()
+    let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+    var netWorkErrorHandler: () -> Void = {}
     
     //MARK: - Methods
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tintColor = UIColor.init(named: "Primary") ?? .blue
+        initNetworkingIndicators(refreshTintColor: tintColor, activityTintColor: tintColor)
         movieTableView.refreshControl = refreshControl
         refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
     }
