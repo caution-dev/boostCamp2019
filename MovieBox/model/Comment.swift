@@ -32,7 +32,7 @@ struct Comment: Codable {
         return formatter.string(from: date)
     }
     
-    enum CommentKey: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case rating, timestamp, writer, contents
         case movieId = "movie_id"
     }
