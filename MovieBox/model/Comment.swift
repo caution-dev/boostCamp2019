@@ -36,13 +36,4 @@ struct Comment: Codable {
         case rating, timestamp, writer, contents
         case movieId = "movie_id"
     }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CommentKey.self)
-        rating = try container.decode(Double.self, forKey: .rating)
-        timestamp = try container.decode(Double.self, forKey: .timestamp)
-        writer = try container.decode(String.self, forKey: .writer)
-        movieId = try container.decode(String.self, forKey: .movieId)
-        contents = try container.decode(String.self, forKey: .contents)
-    }
 }

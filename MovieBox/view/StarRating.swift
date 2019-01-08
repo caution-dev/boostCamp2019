@@ -62,9 +62,10 @@ class StarRating: UIStackView {
     private func updateImageView() {
         var calcRating: Double = rating
         let bundle = Bundle(for: type(of: self))
-        let fullStar = UIImage(named: "ic_star_large_full", in: bundle, compatibleWith: self.traitCollection)
-        let halfStar = UIImage(named: "ic_star_large_half", in: bundle, compatibleWith: self.traitCollection)
-        let emptyStar = UIImage(named: "ic_star_large", in: bundle, compatibleWith: self.traitCollection)
+        let fullStar = UIImage(named: "ic_star_large_full", in: bundle, compatibleWith: traitCollection)
+        let halfStar = UIImage(named: "ic_star_large_half", in: bundle, compatibleWith: traitCollection)
+        let emptyStar = UIImage(named: "ic_star_large", in: bundle, compatibleWith: traitCollection)
+        
         ratingImageViews.forEach { imageView in
             switch calcRating {
             case 2...:

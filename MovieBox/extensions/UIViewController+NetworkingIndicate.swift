@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension NetworkingIndicate where Self: UIViewController {
+    
     func toggleIndicator(force: Bool = false) {
         if force || activityIndicator.isAnimating {
             activityIndicator.stopAnimating()

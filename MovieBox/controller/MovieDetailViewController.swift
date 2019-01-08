@@ -43,7 +43,6 @@ class MovieDetailViewController: UIViewController, NetworkingIndicate {
             })
         }
     }
-
     
     //MARK: Private Properties
     private var detail: MovieDetail? = nil
@@ -62,9 +61,10 @@ class MovieDetailViewController: UIViewController, NetworkingIndicate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fullImage" {
+            // 케이스 별로 에러 처리를 하기 위해서 guard let 구문으로 했다.
             guard let navi = segue.destination as? UINavigationController else { return }
             guard let destination = navi.topViewController as? FullImageViewController else { return }
-            guard let detail = detail else {return}
+            guard let detail = detail else { return }
             guard let imageUrl = URL(string: detail.image) else { return }
             destination.bind(movieName: detail.title, url: imageUrl)
         }
@@ -151,6 +151,5 @@ extension MovieDetailViewController: UITableViewDataSource {
             return cell
         }
     }
-    
     
 }
