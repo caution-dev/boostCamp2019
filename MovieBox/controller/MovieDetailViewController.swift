@@ -47,6 +47,7 @@ class MovieDetailViewController: UIViewController, NetworkingIndicate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
+        detailTable.separatorStyle = .none
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
