@@ -64,24 +64,4 @@ struct MovieDetail: Codable {
         return image
     }
     
-    enum MovieGrade: Int {
-        case all = 0
-        case child = 12
-        case youngth = 15
-        case adult = 19
-        
-        var image: UIImage! {
-            switch self {
-            case .all:
-                return UIImage(named: "ic_0")
-            case .child:
-                return UIImage(named: "ic_12")
-            case .youngth:
-                return UIImage(named: "ic_15")
-            case .adult:
-                return UIImage(named: "ic_19")
-            }
-        }
-    }
-    
 }

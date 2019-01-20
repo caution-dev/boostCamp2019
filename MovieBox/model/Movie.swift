@@ -32,7 +32,6 @@ struct Movie: Codable {
     let reservationRate: Double
     private let userRating: Double
     let date: String
-    fileprivate let hello = "helllllo"
     
     var fullDescription: String {
 
@@ -54,26 +53,6 @@ struct Movie: Codable {
         guard let thumbnail = thumb else {return nil}
         guard let imageURL: URL = URL(string: thumbnail) else  {return nil}
         return imageURL
-    }
-    
-    enum MovieGrade: Int {
-        case all = 0
-        case child = 12
-        case youngth = 15
-        case adult = 19
-        
-        var image: UIImage! {
-            switch self {
-            case .all:
-                return UIImage(named: "ic_0")
-            case .child:
-                return UIImage(named: "ic_12")
-            case .youngth:
-                return UIImage(named: "ic_15")
-            case .adult:
-                return UIImage(named: "ic_19")
-            }
-        }
     }
     
     enum CodingKeys: String, CodingKey {
