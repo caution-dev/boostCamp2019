@@ -115,7 +115,7 @@ class MovieDetailViewController: UIViewController, NetworkingIndicate {
             showNetworkErrorAlert(completion: nil, actionHandler: { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             })
-            alertIsPresented = true
+            alertIsPresented.toggle()
         }
     }
 }
