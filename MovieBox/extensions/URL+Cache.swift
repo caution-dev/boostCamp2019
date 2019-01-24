@@ -42,7 +42,7 @@ extension URL {
         }
         
         let task = URLSession.shared.dataTask(with: self) {
-            data, response, error in
+            data, _, error in
             if error == nil {
                 if let data = data, let image = UIImage(data: data) {
                     ImageCache.shared.setObject(
@@ -51,7 +51,7 @@ extension URL {
                         cost: data.count)
                     
                     let fileManager = FileManager.default
-                    if fileManager.fileExists(atPath: self.diskPath) == false {
+                    if !fileManager.fileExists(atPath: self.diskPath) {
                         do {
                             try data.write(to: URL(fileURLWithPath: self.diskPath), options: .atomic)
                         } catch {
