@@ -42,13 +42,12 @@ class MovieCollectionViewController: UIViewController {
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let cell =  sender as? UICollectionViewCell {
-            if let indexPath = movieCollectionView.indexPath(for: cell) {
-                guard let destination = segue.destination as? MovieDetailViewController else {
-                    return
-                }
-                destination.bindData(movie: MovieInfoHolder.shared.item(at: indexPath.row))
+        guard let cell = sender as? UICollectionViewCell else { return }
+        if let indexPath = movieCollectionView.indexPath(for: cell) {
+            guard let destination = segue.destination as? MovieDetailViewController else {
+                return
             }
+            destination.bindData(movie: MovieInfoHolder.shared.item(at: indexPath.row))
         }
     }
     
