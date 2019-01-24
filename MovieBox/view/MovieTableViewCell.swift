@@ -15,7 +15,7 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var grade: UIImageView!
     @IBOutlet weak var fullDescription: UILabel!
     @IBOutlet weak var openDate: UILabel!
-    var imageUrl: URL?
+    private var imageUrl: URL?
     
     func bindData(movie data: Movie) {
         title.text = data.title
