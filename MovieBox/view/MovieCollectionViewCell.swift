@@ -15,7 +15,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var reservationInfo: UILabel!
     @IBOutlet weak var openDate: UILabel!
     @IBOutlet weak var grade: UIImageView!
-    var imageUrl: URL?
+    private var imageUrl: URL?
     
     func bindData(movie data: Movie) {
         title.text = data.title
