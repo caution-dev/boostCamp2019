@@ -6,7 +6,6 @@
 //  Copyright © 2018 juhee. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct Movie: Codable {
