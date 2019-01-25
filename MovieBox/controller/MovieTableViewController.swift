@@ -62,7 +62,7 @@ class MovieTableViewController: UIViewController {
     //MARK: - Request Data
     private func loadData(force: Bool = false) {
         toggleIndicator()
-        MovieInfoHolder.shared.getMovies(success: { [weak self] movies in
+        MovieInfoHolder.shared.getMovies(success: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.toggleIndicator(force: true)
                 self?.refreshControl?.endRefreshing()
