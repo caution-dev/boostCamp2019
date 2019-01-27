@@ -6,7 +6,6 @@
 //  Copyright © 2019 juhee. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension NetworkingIndicate where Self: UIViewController {

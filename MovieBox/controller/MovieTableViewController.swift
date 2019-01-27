@@ -49,20 +49,19 @@ class MovieTableViewController: UIViewController {
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let cell =  sender as? UITableViewCell {
-            if let indexPath = movieTableView.indexPath(for: cell) {
-                guard let destination = segue.destination as? MovieDetailViewController else {
-                    return
-                }
-                destination.bindData(movie: MovieInfoHolder.shared.item(at: indexPath.row))
+        guard let cell = sender as? UITableViewCell else { return }
+        if let indexPath = movieTableView.indexPath(for: cell) {
+            guard let destination = segue.destination as? MovieDetailViewController else {
+                return
             }
+            destination.bindData(movie: MovieInfoHolder.shared.item(at: indexPath.row))
         }
     }
     
     //MARK: - Request Data
     private func loadData(force: Bool = false) {
         toggleIndicator()
-        MovieInfoHolder.shared.getMovies(success: { [weak self] movies in
+        MovieInfoHolder.shared.getMovies(success: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.toggleIndicator(force: true)
                 self?.refreshControl?.endRefreshing()

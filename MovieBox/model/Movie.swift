@@ -6,7 +6,6 @@
 //  Copyright © 2018 juhee. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct Movie: Codable {
@@ -34,7 +33,6 @@ struct Movie: Codable {
     let date: String
     
     var fullDescription: String {
-
         return "평점 : \(userRating) 예매순위 : \(reservationGrade) 예매율 : \(reservationRate)"
     }
     
@@ -51,7 +49,7 @@ struct Movie: Codable {
     
     var thumbUrl: URL? {
         guard let thumbnail = thumb else {return nil}
-        guard let imageURL: URL = URL(string: thumbnail) else  {return nil}
+        guard let imageURL: URL = URL(string: thumbnail) else {return nil}
         return imageURL
     }
     
