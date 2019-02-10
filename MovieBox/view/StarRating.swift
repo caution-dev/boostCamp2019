@@ -14,7 +14,11 @@ class StarRating: UIStackView {
     //MARK: IBInspectable
     @IBInspectable var rating: Double = 7.98 {
         didSet {
-            updateImageView()
+            if ratingImageViews.isEmpty {
+                setupImageViews()
+            } else {
+                updateImageView()
+            }
         }
     }
     @IBInspectable var starSize: CGSize = CGSize(width: 16.0, height: 16.0) {
@@ -37,7 +41,6 @@ class StarRating: UIStackView {
 
     //MARK: Private Methods
     private func setupImageViews() {
-        guard let emptyStarImageView = UIImage(named: "ic_star_large") else {return}
         // clear any existing imageViews
         ratingImageViews.forEach { imageView in
             removeArrangedSubview(imageView)
@@ -45,6 +48,8 @@ class StarRating: UIStackView {
         }
         ratingImageViews.removeAll()
         
+        let bundle = Bundle(for: type(of: self))
+        let emptyStarImageView = UIImage(named: "ic_star_large", in: bundle, compatibleWith: traitCollection)
         for _ in 0..<5 {
             let imageView: UIImageView = UIImageView()
             imageView.image = emptyStarImageView
@@ -57,6 +62,7 @@ class StarRating: UIStackView {
             addArrangedSubview(imageView)
             ratingImageViews.append(imageView)
         }
+        updateImageView()
     }
     
     private func updateImageView() {
@@ -79,12 +85,12 @@ class StarRating: UIStackView {
             if calcRating < 0 {
                 return
             }
+            imageView.prepareForInterfaceBuilder()
         }
     }
     
     override func prepareForInterfaceBuilder() {
         setupImageViews()
-        updateImageView()
     }
 
     override func systemLayoutSizeFitting(_ targetSize: CGSize) -> CGSize {
